@@ -6,18 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        // table de liaison entre les eleves et les inscriptions
-        Schema::create('eleve_inscriptions', function (Blueprint $table) {
+        Schema::create('resultats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('eleve_id');
-            $table->unsignedBigInteger('inscription_id');
+            $table->unsignedBigInteger('classe_id');
             $table->foreign('eleve_id')->references('id')->on('eleves')->onDelete('cascade');
-            $table->foreign('inscription_id')->references('id')->on('inscriptions')->onDelete('cascade');
+            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->string('annee_scolaire');
+            $table->decimal('moyenne',5,2);
+            $table->enum('decision', ['admis', 'redoublant','exclu']);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eleve_inscriptions');
+        Schema::dropIfExists('resultats');
     }
 };

@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+   public function up(): void
     {
         // table de liaison entre les eleves et les parents
         Schema::create('eleve_parents', function (Blueprint $table) {

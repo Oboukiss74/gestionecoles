@@ -9,16 +9,22 @@
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <!-- Theme Config Js -->
-    <script src="assets/js/config.js"></script>
-
-    <!-- App css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
     <!-- Icons css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+
+    <!-- App css -->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {{-- lien de fontawesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -33,7 +39,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="{{ route('dist.page','index') }}" class="logo-light">
+                        <a href="{{ route('dist.page', 'index') }}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                             </span>
@@ -43,12 +49,12 @@
                         </a>
 
                         <!-- Logo Dark -->
-                        <a href="{{ route('dist.page','index') }}" class="logo-dark">
+                        <a href="{{ route('dist.page', 'index') }}" class="logo-dark">
                             <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="dark logo">
+                                <img src="{{ asset('assets/images/logo-dark.png') }}" alt="dark logo">
                             </span>
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="small logo">
+                                <img src="{{ asset('assets/images/logo-sm.png') }}" alt="small logo">
                             </span>
                         </a>
                     </div>
@@ -59,7 +65,7 @@
                     </button>
 
                     <!-- Page Title -->
-                    <h4 class="page-title d-none d-sm-block">Form Elements</h4>
+                    <h4 class="page-title d-none d-sm-block">Gestion d'etablissement</h4>
                 </div>
 
                 <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -75,340 +81,363 @@
                             </form>
                         </div>
                     </li>
+                    @guest
 
-                    <li class="dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+
+                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('eleves.connexion') }}"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
-                            <span class="align-middle d-none d-lg-inline-block">English</span>
-                            <span class="mdi mdi-chevron-down fs-22 d-none d-sm-inline-block align-middle"></span>
+                            <span>Se connecter</span>
 
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
+                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('eleves.create') }}" role="button"
+                            aria-haspopup="false" aria-expanded="false">
+                            <span>Creer mon compte</span>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1"
-                                    height="12"> <span class="align-middle">German</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12">
-                                <span class="align-middle">Italian</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12">
-                                <span class="align-middle">Spanish</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1"
-                                    height="12"> <span class="align-middle">Russian</span>
-                            </a>
-
-                        </div>
-                    </li>
-
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
-                            role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="ri-mail-line fs-22"></i>
-
-                            <span class="noti-icon-badge badge text-bg-purple">4</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0 fs-16 fw-semibold"> Messages</h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                            <small>Clear All</small>
-                                        </a>
+                    @endguest
+
+                    @auth
+
+
+                        <li class="dropdown">
+
+
+
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
+                                <span class="align-middle d-none d-lg-inline-block">English</span>
+                                <span class="mdi mdi-chevron-down fs-22 d-none d-sm-inline-block align-middle"></span>
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1"
+                                        height="12"> <span class="align-middle">German</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12">
+                                    <span class="align-middle">Italian</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1"
+                                        height="12">
+                                    <span class="align-middle">Spanish</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1"
+                                        height="12"> <span class="align-middle">Russian</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="ri-mail-line fs-22"></i>
+
+                                <span class="noti-icon-badge badge text-bg-purple">4</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0 fs-16 fw-semibold"> Messages</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                                <small>Clear All</small>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div style="max-height: 300px;" data-simplebar>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);"
+                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-1.jpg"
+                                                            class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold fs-14">Cristina Pride <small
+                                                            class="fw-normal text-muted float-end ms-1">1 day ago</small>
+                                                    </h5>
+                                                    <small class="noti-item-subtitle text-muted">Hi, How are you? What
+                                                        about our
+                                                        next meeting</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);"
+                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-2.jpg"
+                                                            class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold fs-14">Sam Garret <small
+                                                            class="fw-normal text-muted float-end ms-1">2 day ago</small>
+                                                    </h5>
+                                                    <small class="noti-item-subtitle text-muted">Yeah everything is
+                                                        fine</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);"
+                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-3.jpg"
+                                                            class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold fs-14">Karen Robinson <small
+                                                            class="fw-normal text-muted float-end ms-1">2 day ago</small>
+                                                    </h5>
+                                                    <small class="noti-item-subtitle text-muted">Wow that's great</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);"
+                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-4.jpg"
+                                                            class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold fs-14">Sherry Marshall <small
+                                                            class="fw-normal text-muted float-end ms-1">3 day ago</small>
+                                                    </h5>
+                                                    <small class="noti-item-subtitle text-muted">Hi, How are you? What
+                                                        about our
+                                                        next meeting</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);"
+                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <div class="notify-icon">
+                                                        <img src="assets/images/users/avatar-5.jpg"
+                                                            class="img-fluid rounded-circle" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                    <h5 class="noti-item-title fw-semibold fs-14">Shawn Millard <small
+                                                            class="fw-normal text-muted float-end ms-1">4 day ago</small>
+                                                    </h5>
+                                                    <small class="noti-item-subtitle text-muted">Yeah everything is
+                                                        fine</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
+                                    View All
+                                </a>
+
                             </div>
+                        </li>
 
-                            <div style="max-height: 300px;" data-simplebar>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-1.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold fs-14">Cristina Pride <small
-                                                        class="fw-normal text-muted float-end ms-1">1 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Hi, How are you? What
-                                                    about our
-                                                    next meeting</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-2.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold fs-14">Sam Garret <small
-                                                        class="fw-normal text-muted float-end ms-1">2 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Yeah everything is
-                                                    fine</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-3.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold fs-14">Karen Robinson <small
-                                                        class="fw-normal text-muted float-end ms-1">2 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Wow that's great</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-4.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold fs-14">Sherry Marshall <small
-                                                        class="fw-normal text-muted float-end ms-1">3 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Hi, How are you? What
-                                                    about our
-                                                    next meeting</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-5.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold fs-14">Shawn Millard <small
-                                                        class="fw-normal text-muted float-end ms-1">4 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Yeah everything is
-                                                    fine</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <!-- All-->
-                            <a href="javascript:void(0);"
-                                class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
-                                View All
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="ri-notification-3-line fs-22"></i>
+                                <span class="noti-icon-badge badge text-bg-pink">3</span>
                             </a>
-
-                        </div>
-                    </li>
-
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
-                            role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="ri-notification-3-line fs-22"></i>
-                            <span class="noti-icon-badge badge text-bg-pink">3</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0 fs-16 fw-semibold"> Notification</h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                            <small>Clear All</small>
-                                        </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0 fs-16 fw-semibold"> Notification</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                                <small>Clear All</small>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div style="max-height: 300px;" data-simplebar>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-primary-subtle">
+                                            <i class="mdi mdi-account text-primary"></i>
+                                        </div>
+                                        <p class="notify-details">Caleb Flakelar commented on Admin
+                                            <small class="noti-time">1 min ago</small>
+                                        </p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-warning-subtle">
+                                            <i class="mdi mdi-account-plus text-warning"></i>
+                                        </div>
+                                        <p class="notify-details">New user registered.
+                                            <small class="noti-time">5 hours ago</small>
+                                        </p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-danger-subtle">
+                                            <i class="mdi mdi-heart text-danger"></i>
+                                        </div>
+                                        <p class="notify-details">Carlos Crouch liked
+                                            <small class="noti-time">3 days ago</small>
+                                        </p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-pink-subtle">
+                                            <span class="mdi mdi-account-box text-pink"></span>
+                                        </div>
+                                        <p class="notify-details">Caleb Flakelar commented on Admi
+                                            <small class="noti-time">4 days ago</small>
+                                        </p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-purple-subtle">
+                                            <i class="mdi mdi-account-plus text-purple"></i>
+                                        </div>
+                                        <p class="notify-details">New user registered.
+                                            <small class="noti-time">7 days ago</small>
+                                        </p>
+                                    </a>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-success-subtle text-success">
+                                        </div>
+                                        <p class="notify-details">Carlos Crouch liked <b>Admin</b>.
+                                            <small class="noti-time">Carlos Crouch liked</small>
+                                        </p>
+                                    </a>
+                                </div>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
+                                    View All
+                                </a>
+
                             </div>
+                        </li>
 
-                            <div style="max-height: 300px;" data-simplebar>
+
+                        <li class="d-none d-sm-inline-block">
+                            <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
+                                <span class="ri-settings-3-line fs-22"></span>
+                            </a>
+                        </li>
+
+                        <li class="d-none d-sm-inline-block">
+                            <div class="nav-link" id="light-dark-mode">
+                                <i class="ri-moon-line fs-22"></i>
+                            </div>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown"
+                                href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                                        class="rounded-circle">
+                                </span>
+                                <span class="d-lg-block d-none">
+                                    <h5 class="my-0 fw-normal">Adams<i
+                                            class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i>
+                                    </h5>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-primary-subtle">
-                                        <i class="mdi mdi-account text-primary"></i>
-                                    </div>
-                                    <p class="notify-details">Caleb Flakelar commented on Admin
-                                        <small class="noti-time">1 min ago</small>
-                                    </p>
+                                <div class=" dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="{{ route('eleves.profile') }}" class="dropdown-item">
+                                    <i class="ri-account-pin-circle-line fs-16 align-middle me-1 "></i>
+                                    <span>My Account</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-warning-subtle">
-                                        <i class="mdi mdi-account-plus text-warning"></i>
-                                    </div>
-                                    <p class="notify-details">New user registered.
-                                        <small class="noti-time">5 hours ago</small>
-                                    </p>
+                                <a href="{{ route('eleves.profile') }}" class="dropdown-item">
+                                    <i class="ri-settings-4-line fs-16 align-middle me-1"></i>
+                                    <span>Settings</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-danger-subtle">
-                                        <i class="mdi mdi-heart text-danger"></i>
-                                    </div>
-                                    <p class="notify-details">Carlos Crouch liked
-                                        <small class="noti-time">3 days ago</small>
-                                    </p>
+                                <a href="pages-faq.html" class="dropdown-item">
+                                    <i class="ri-customer-service-2-line fs-16 align-middle me-1"></i>
+                                    <span>Support</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-pink-subtle">
-                                        <span class="mdi mdi-account-box text-pink"></span>
-                                    </div>
-                                    <p class="notify-details">Caleb Flakelar commented on Admi
-                                        <small class="noti-time">4 days ago</small>
-                                    </p>
+                                <a href="auth-lock-screen.html" class="dropdown-item">
+                                    <i class="ri-lock-line fs-16 align-middle me-1"></i>
+                                    <span>Lock Screen</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-purple-subtle">
-                                        <i class="mdi mdi-account-plus text-purple"></i>
-                                    </div>
-                                    <p class="notify-details">New user registered.
-                                        <small class="noti-time">7 days ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-success-subtle text-success">
-                                    </div>
-                                    <p class="notify-details">Carlos Crouch liked <b>Admin</b>.
-                                        <small class="noti-time">Carlos Crouch liked</small>
-                                    </p>
+                                <a href="auth-logout.html" class="dropdown-item">
+                                    <i class="ri-logout-circle-r-line align-middle me-1"></i>
+                                    <span>Logout</span>
                                 </a>
                             </div>
-
-                            <!-- All-->
-                            <a href="javascript:void(0);"
-                                class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
-                                View All
-                            </a>
-
-                        </div>
-                    </li>
-
-                    <li class="d-none d-sm-inline-block">
-                        <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
-                            <span class="ri-settings-3-line fs-22"></span>
-                        </a>
-                    </li>
-
-                    <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode">
-                            <i class="ri-moon-line fs-22"></i>
-                        </div>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <span class="account-user-avatar">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
-                                    class="rounded-circle">
-                            </span>
-                            <span class="d-lg-block d-none">
-                                <h5 class="my-0 fw-normal">Adams<i
-                                        class="ri-arrow-down-s-line fs-22 d-none d-sm-inline-block align-middle"></i>
-                                </h5>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
-                            <!-- item-->
-                            <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
-                            </div>
-
-                            <!-- item-->
-                            <a href="pages-profile.html" class="dropdown-item">
-                                <i class="ri-account-pin-circle-line fs-16 align-middle me-1 "></i>
-                                <span>My Account</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="pages-profile.html" class="dropdown-item">
-                                <i class="ri-settings-4-line fs-16 align-middle me-1"></i>
-                                <span>Settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="pages-faq.html" class="dropdown-item">
-                                <i class="ri-customer-service-2-line fs-16 align-middle me-1"></i>
-                                <span>Support</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="auth-lock-screen.html" class="dropdown-item">
-                                <i class="ri-lock-line fs-16 align-middle me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="auth-logout.html" class="dropdown-item">
-                                <i class="ri-logout-circle-r-line align-middle me-1"></i>
-                                <span>Logout</span>
-                            </a>
-                        </div>
-                    </li>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -419,7 +448,7 @@
         <div class="leftside-menu">
 
             <!-- Logo Light -->
-            <a href="{{ route('dist.page','index') }}" class="logo logo-light">
+            <a href="{{ route('dist.page', 'index') }}" class="logo logo-light">
                 <span class="logo-lg">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                 </span>
@@ -429,7 +458,7 @@
             </a>
 
             <!-- Logo Dark -->
-            <a href="{{ route('dist.page','index') }}" class="logo logo-dark">
+            <a href="{{ route('dist.page', 'index') }}" class="logo logo-dark">
                 <span class="logo-lg">
                     <img src="assets/images/logo-dark.png" alt="dark logo">
                 </span>
@@ -444,23 +473,14 @@
                     <li class="side-nav-title">Main</li>
 
                     <li class="side-nav-item">
-                        <a href="index.html" class="side-nav-link">
+                        <a href="{{ route('accueil') }}" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
-                            <span> Dashboard </span>
+                            <span> Tableau de bord </span>
                             <span class="badge bg-success float-end">9+</span>
                         </a>
                     </li>
 
-                    <li class="side-nav-title">App</li>
-
-                    <li class="side-nav-item">
-                        <a href="{{ route('dist.page', 'apps-calendar') }}" class="side-nav-link">
-                            <i class="ri-calendar-line"></i>
-                            <span> Calendar</span>
-                        </a>
-                    </li>
-
-                    <li class="side-nav-item">
+                    {{-- <li class="side-nav-item">
                         <a href="{{ route('dist.page', 'apps-kanban-board') }}" class="side-nav-link">
                             <i class="ri-artboard-line"></i>
                             <span> Kanban Board</span>
@@ -477,16 +497,18 @@
                         <div class="collapse" id="sidebarPagesinvoice">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page', 'apps-invoice-report') }}">Invoice Report</a>
+                                    <a class="side-nav-link"
+                                        href="{{ route('dist.page', 'apps-invoice-report') }}">Invoice Report</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page', 'apps-invoice') }}">Invoice</a>
+                                    <a class="side-nav-link"
+                                        href="{{ route('dist.page', 'apps-invoice') }}">Invoice</a>
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
 
-                    <li class="side-nav-title">Extra Pages</li>
+                    {{-- <li class="side-nav-title">Extra Pages</li> --}}
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false"
@@ -505,7 +527,7 @@
                                     <a class="side-nav-link" href="pages-contact-list.html">Contact List</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="pages-profile.html">Profile</a>
+                                    <a class="side-nav-link" href="{{ route('eleves.profile') }}">Profile</a>
                                 </li>
                                 <li class="side-nav-item">
                                     <a class="side-nav-link" href="pages-timeline.html">Timeline</a>
@@ -536,27 +558,30 @@
                         <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false"
                             aria-controls="sidebarPagesAuth" class="side-nav-link">
                             <i class="ri-account-circle-line"></i>
-                            <span> Authentication </span>
+                            <span> Authentification </span>
                             <span class="menu-arrow"></span>
 
                         </a>
                         <div class="collapse" id="sidebarPagesAuth">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-login.html">Login</a>
+                                    <a class="side-nav-link" href="{{ route('eleves.connexion') }}">connexion</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-register.html">Register</a>
+                                    <a class="side-nav-link" href="{{ route('eleves.create') }}">compte</a>
                                 </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-logout.html">Logout</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-forgotpw.html">Forgot Password</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="auth-lock-screen.html">Lock Screen</a>
-                                </li>
+                                @auth
+                                    <li class="side-nav-item">
+                                        <a class="side-nav-link" href="auth-logout.html">Logout</a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a class="side-nav-link" href="auth-forgotpw.html">Forgot Password</a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a class="side-nav-link" href="auth-lock-screen.html">Lock Screen</a>
+                                    </li>
+                                @endauth
+
 
                             </ul>
                         </div>
@@ -777,6 +802,58 @@
                         <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false"
                             aria-controls="sidebarForms" class="side-nav-link">
                             <i class="ri-survey-line"></i>
+                            <span>Classes </span>
+                            <span class="menu-arrow"></span>
+
+                        </a>
+                        <div class="collapse" id="sidebarForms">
+                            <ul class="side-nav-second-level">
+
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('ajouter_classe') }}">Ajouter classes</a>
+
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('eleves.create') }}">test inscription</a>
+                                </li>
+
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('liste_classes') }}">liste
+                                        des classes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false"
+                            aria-controls="sidebarForms" class="side-nav-link">
+                            <i class="ri-survey-line"></i>
+                            <span>Eleves </span>
+                            <span class="menu-arrow"></span>
+
+                        </a>
+                        <div class="collapse" id="sidebarForms">
+                            <ul class="side-nav-second-level">
+
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('eleves.create') }}">Ajouter Eleves</a>
+
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('eleves.create') }}">test inscription</a>
+                                </li>
+
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('eleves.liste') }}">liste
+                                        des Eleves</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false"
+                            aria-controls="sidebarForms" class="side-nav-link">
+                            <i class="ri-survey-line"></i>
                             <span>Forms </span>
                             <span class="menu-arrow"></span>
 
@@ -784,29 +861,37 @@
                         <div class="collapse" id="sidebarForms">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-elements') }}">Basic Elements</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-elements') }}">Basic
+                                        Elements</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-advanced') }}">Form Advanced</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-advanced') }}">Form
+                                        Advanced</a>
+                                </li>
+
+
+                                {{-- <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('eleves.connexion') }}">Connexion</a>
+                                </li> --}}
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-wizard') }}">Form
+                                        Wizard</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','formulaireEleves') }}">Ajouter Eleves</a>
-                                    <a class="side-nav-link" href="{{ route('dist.page','formulaireClasses') }}">Ajouter Classes</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-fileuploads') }}">File
+                                        Uploads</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-wizard') }}">Form Wizard</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-editors') }}">Form
+                                        Editors</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-fileuploads') }}">File Uploads</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-image-crop') }}">Image
+                                        Crop</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-editors') }}">Form Editors</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-image-crop') }}">Image Crop</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','form-x-editable') }}">X Editable</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'form-x-editable') }}">liste
+                                        des classes</a>
                                 </li>
                             </ul>
                         </div>
@@ -824,16 +909,23 @@
                         <div class="collapse" id="sidebarTables">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','tables-basic') }}">Basic Tables</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'tables-basic') }}">Basic
+                                        Tables</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','tables-datatable') }}">Data Tables</a>
+                                    <a class="side-nav-link" href="{{ route('eleves.liste') }}">eleves</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','tables-editable') }}">Editable Tables</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'tables-datatable') }}">Data
+                                        Tables</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','tables-responsive') }}">Responsive Table</a>
+                                    <a class="side-nav-link"
+                                        href="{{ route('dist.page', 'tables-editable') }}">Editable Tables</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a class="side-nav-link"
+                                        href="{{ route('dist.page', 'tables-responsive') }}">Responsive Table</a>
                                 </li>
                             </ul>
                         </div>
@@ -850,10 +942,12 @@
                         <div class="collapse" id="sidebarMaps">
                             <ul class="side-nav-second-level">
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','maps-google') }}">Google Maps</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'maps-google') }}">Google
+                                        Maps</a>
                                 </li>
                                 <li class="side-nav-item">
-                                    <a class="side-nav-link" href="{{ route('dist.page','maps-vector') }}">Vector Maps</a>
+                                    <a class="side-nav-link" href="{{ route('dist.page', 'maps-vector') }}">Vector
+                                        Maps</a>
                                 </li>
                             </ul>
                         </div>
@@ -936,13 +1030,13 @@
         <!-- ============================================================== -->
         @yield('wrapper2')
         {{-- <div class="content-page"> --}}
-            <div class="content">
+        <div class="content">
 
-                <!-- Start Content-->
-                {{-- <div class="container-fluid"> --}}
+            <!-- Start Content-->
+            {{-- <div class="container-fluid"> --}}
 
-                    {{-- <div class="row"> --}}
-                        {{-- <div class="col-12">
+            {{-- <div class="row"> --}}
+            {{-- <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class=".card-title">Input Types</h4>
@@ -1114,9 +1208,9 @@
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
                         </div><!-- end col --> --}}
-                    {{-- </div><!-- end row --> --}}
+            {{-- </div><!-- end row --> --}}
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -1196,7 +1290,7 @@
                         </div><!-- end col -->
                     </div><!-- end row --> --}}
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -1278,9 +1372,9 @@
                             </div> <!-- end card -->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
@@ -1497,9 +1591,9 @@
                             </div> <!-- end card -->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
@@ -1611,10 +1705,10 @@
                             </div> <!-- end card -->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
@@ -1710,11 +1804,11 @@
                             </div> <!-- end card -->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                    <!-- Inline Form -->
-                    {{-- <div class="row"> --}}
-                        {{-- <div class="col-md-12">
+            <!-- Inline Form -->
+            {{-- <div class="row"> --}}
+            {{-- <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class=".card-title">Inline Form</h4>
@@ -1779,9 +1873,9 @@
                             </div> <!-- end card -->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                    {{-- <div class="row">
+            {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -1822,10 +1916,10 @@
                             </div> <!-- end card-->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                    <!-- Form row -->
-                    {{-- <div class="row">
+            <!-- Form row -->
+            {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -1899,15 +1993,15 @@
                             </div> <!-- end card-->
                         </div> <!-- end col -->
                     </div> --}}
-                    <!-- end row -->
+            <!-- end row -->
 
-                {{-- </div> <!-- container --> --}}
+            {{-- </div> <!-- container --> --}}
 
-            </div>
-             <!-- content -->
+        </div>
+        <!-- content -->
 
-            <!-- Footer Start -->
-            {{-- <footer class="footer">
+        <!-- Footer Start -->
+        {{-- <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 text-center">
@@ -1918,7 +2012,7 @@
                     </div>
                 </div>
             </footer> --}}
-            <!-- end Footer -->
+        <!-- end Footer -->
 
         {{-- </div> --}}
 

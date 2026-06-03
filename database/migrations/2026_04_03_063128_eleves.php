@@ -13,16 +13,20 @@ return new class extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('classe_id')->constrained()->onDelete('cascade');
+            $table->foreignId('parents_id')->constrained('parents')->onDelete('cascade');
+            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->string('nom');
             $table->string('prenom');
             $table->date('date_naissance');
             $table->string('lieu_naissance');
             $table->enum('sexe', ['M', 'F']);
             $table->string('matricule')->unique();
+            $table->string('password');
             $table->string('nationalite');
             $table->string('telephone');
             $table->string('email')->unique();
-            $table->string('numero_parents');
+            $table->string('telephone_parent');
             $table->string('photos')->nullable();
             $table->timestamps();
         });
@@ -35,5 +39,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('eleves');
     }
-
 };

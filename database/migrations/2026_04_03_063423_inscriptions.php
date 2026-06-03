@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+     public function up(): void
     {
-        Schema::create('resultats', function (Blueprint $table) {
+        Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('eleve_id');
             $table->unsignedBigInteger('classe_id');
             $table->foreign('eleve_id')->references('id')->on('eleves')->onDelete('cascade');
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->string('annee_scolaire');
-            $table->decimal('moyenne',5,2);
-            $table->enum('decision', ['admis', 'redoublant','exclu']);
+            $table->unsignedBigInteger('annee_scolaire_id');
+            $table->foreign('annee_scolaire_id')->references('id')->on('annee_scolaires')->onDelete('cascade');
+            $table->enum('statut_inscription', ['en_attente', 'approuvée', 'refusée']);
+            $table->enum('decision', ['admis', 'redoublant', 'exclu']);
+            $table->string('date_inscription');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resultats');
+        Schema::dropIfExists('inscriptions');
     }
 };

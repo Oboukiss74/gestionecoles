@@ -31,7 +31,7 @@
                                 </p> --}}
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" method="post" action="ajouter-classe">
+                                <form class="needs-validation" method="post" action="enregistrer-classe">
                                     @csrf
                                     {{-- afficher erreur en cas de manque d'informations --}}
                                     @if ($errors->any())
@@ -76,8 +76,12 @@
 
                                     <div class="position-relative mb-3">
                                         <label class="form-label" for="validationTooltip02">Niveau</label>
-                                        <input type="text" class="form-control" id="validationTooltip02"
-                                            placeholder="Niveau" required name="niveau">
+                                        <select name="niveau" id="validationTooltip02" class="form-control">
+                                            <option value="">Sélectionnez un niveau</option>
+                                            <option value="Primaire">Primaire</option>
+                                            <option value="Secondaire">Secondaire</option>
+                                        </select>
+
 
                                     </div>
 

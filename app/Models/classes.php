@@ -32,15 +32,6 @@ class classes extends Model
             ->with('classe')
             ->first();
     }
-    // classe suivante d'un eleve
-    // public function classeSuivante()
-    // {
-    //     return $this->inscriptions()
-    //         ->where('annee_scolaire', anneeScolaireSuivante())
-    //         ->where('statut', 'validee')
-    //         ->with('classe')
-    //         ->first();
-    // }
 
     // effectif d'une classe
     public function effectif()

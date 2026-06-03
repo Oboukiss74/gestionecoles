@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Eleves;
+use FactoryMethod\EleveFactory;
 
 return new class extends Migration
 {
@@ -13,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('parents', function (Blueprint $table) {
             $table->id();
-            $table->string('parent_nom');
-            $table->string('parent_prenom');
-            $table->string('parent_telephone');
-            $table->string('parent_email')->unique();
-            $table->string('parent_profession');
-            $table->string('lien_parente');
+            $table->string('nom_parent');
+            $table->string('prenom_parent');
+            $table->string('telephone_parent');
+            $table->string('email_parent')->unique();
+            $table->string('profession_parent');
+            $table->string('residence_parent')->nullable();
+            $table->string('lien_parente')->nullable();
             $table->timestamps();
         });
     }
@@ -30,13 +33,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('parents');
     }
-    // je veut une fonction pour modifier les attributs d'un parent
-    public function modifierAttributsParent(): void
-    {        Schema::table('parents', function (Blueprint $table) {
-            $table->string('nom_parent')->after('nom');
-            $table->string('prenom_parent')->after('prenom');
-            $table->string('telephone_parent')->after('telephone');
-            $table->string('profession_parent')->after('profession');
-        });
-    }
+
 };

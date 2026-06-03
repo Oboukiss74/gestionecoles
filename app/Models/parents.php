@@ -15,4 +15,9 @@ class parents extends Model
         'profession_parent',
         'residence_parent',
     ];
+    public function Eleves()
+    {
+        return $this->hasMany(Eleves::class);
+    }
+
 }

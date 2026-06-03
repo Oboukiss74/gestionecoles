@@ -9,13 +9,17 @@ class AccueilController extends Controller
     //
     public function index()
     {
-        return view('dist.form-elements');
+        return view('accueil.index');
+    }
+    public function Acceuil()
+    {
+        return view('Acceuil.index');
     }
     //creer une fonction qui regroupe toutes les vues dependant du clic pour afficher la vue correspondante
     public function AfficherLesDist($page)
     {
-        $niveau = Classes::all();
-        return view('dist.' . $page, compact('niveau'));
+
+        return view('dist.' . $page);
     }
     public function AfficherLesSrc($page)
     {

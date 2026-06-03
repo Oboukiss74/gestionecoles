@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class ClasseController extends Controller
 {
     //ajouter une classe
+    public function Ajout_Classe()
+    {
+
+        return view('classes.ajouter_Classes');
+    }
+    // confirmer l'ajout d'une classe
     public function ajouterClasse(Request $request)
     {
         $request->validate([
@@ -30,6 +36,12 @@ class ClasseController extends Controller
             'annee' => $request->annee,
         ]);
         //
-        return redirect()->route('dist.page','formulaireClasses')->with('successclasse', 'Classe ajoutée avec succès !');
+        return redirect()->route('ajouter_classe')->with('successclasse', 'Classe ajoutée avec succès !');
+    }
+    // liste des classes
+    public function listeClasses()
+    {
+        $classes = Classes::all();
+        return view('classes.liste_classes', compact('classes'));
     }
 }
