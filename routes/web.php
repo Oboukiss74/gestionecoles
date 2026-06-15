@@ -3,13 +3,24 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/login', function () {
+    Route::get('/login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
+    // return view('welcome');
 // });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,6 +43,8 @@ Route::get('/connexion', [App\Http\Controllers\ElevesControler::class,'Connexion
 //liste des eleves
 Route::get('/liste-eleves', [App\Http\Controllers\ElevesControler::class,'ListeElelves'])->name('eleves.liste');
 
+
+// Route::middleware('auth')->group(function () {
 // profile eleves
 Route::get('/profile-eleve', [App\Http\Controllers\ElevesControler::class,'profile'])->name('eleves.profile');
 //formulaire d'ajout des eleves
@@ -54,7 +67,7 @@ Route::get('/testinscription',[App\Http\Controllers\InscriptionController::class
 // Vérifier les inscriptions
 Route::get('/inscription/verifier/{eleve_id}', [App\Http\Controllers\InscriptionAdmin::class, 'verifierStatut'])->name('inscription.verifier');
 Route::resource('inscriptions', App\Http\Controllers\InscriptionAdmin::class);
-//route pour afficher les vues en fonction du clic dist
-Route::get('/{page}', [App\Http\Controllers\AccueilController::class, 'AfficherLesDist'])->name('dist.page');
+//route pour afficher les vues en fonction du clic
+// Route::get('/{page}', [App\Http\Controllers\AccueilController::class, 'AfficherLesDist'])->name('dist.page');
 
 require __DIR__.'/auth.php';

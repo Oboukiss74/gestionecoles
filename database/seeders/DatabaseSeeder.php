@@ -14,15 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(\Database\Seeders\RoleSeeder::class);
+        $this->call(\Database\Seeders\PermissionSeeder::class);
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
+            'matricule' => 'TestMatricule',
             'email' => 'test@example.com',
         ]);
 
         AnneeScolaire::create([
-            'libelle' => '2024-2025',
+            'libelle' => '2025-2026',
             'active'  => true,
         ]);
     }
