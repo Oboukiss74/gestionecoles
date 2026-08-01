@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class parents extends Model
+class Parents_eleves extends Model
 {
     //
     protected $fillable = [
@@ -17,7 +17,7 @@ class parents extends Model
     ];
     public function Eleves()
     {
-        return $this->hasMany(Eleves::class);
+        return $this->hasMany(Eleves::class, 'parents_id');
     }
 
 }

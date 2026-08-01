@@ -6,24 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class classes extends Model
 {
-    //
     protected $fillable = [
         'nom',
         'niveau',
         'annee',
     ];
-    //relation entre les tables classes et eleves
+
     public function eleves()
     {
         return $this->hasMany(eleves::class);
     }
-    //relation entre les tables classes et inscriptions
+
     public function inscriptions()
     {
         return $this->hasMany(inscriptions::class);
     }
 
-    // classe actuelle d'un eleve
+    public function matieres()
+    {
+        return $this->belongsToMany(Matiere::class, 'classe_matiere', 'classe_id', 'matiere_id')
+            ->withTimestamps()
+            ->withPivot('coefficient');
+    }
+
     public function classeActuelle()
     {
         return $this->inscriptions()
@@ -33,12 +38,16 @@ class classes extends Model
             ->first();
     }
 
-    // effectif d'une classe
     public function effectif()
     {
         return $this->inscriptions()
             ->where('annee_scolaire', anneeScolaireActuelle())
             ->where('statut', 'validee')
             ->count();
+    }
+    public function classeMatiere()
+    {
+        return $this->belongsToMany(Matiere::class, 'classe_matiere', 'classe_id', 'matiere_id')
+            ->withPivot('coefficient');
     }
 }

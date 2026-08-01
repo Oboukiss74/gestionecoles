@@ -14,7 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('eleve_id');
             $table->unsignedBigInteger('parent_id');
             $table->foreign('eleve_id')->references('id')->on('eleves')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('parents')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('parents_eleves')->onDelete('cascade');
             $table->timestamps();
         });
     }

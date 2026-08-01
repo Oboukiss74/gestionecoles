@@ -78,7 +78,7 @@
 
     <footer class="footer footer-alt fw-medium">
         <span class="text-dark">
-            <script>document.write(new Date().getFullYear())</script> © Techmin - Theme by Techzaa
+            <script>document.write(new Date().getFullYear())</script> Gestion des eleves
         </span>
     </footer>
 

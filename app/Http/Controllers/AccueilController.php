@@ -15,6 +15,10 @@ class AccueilController extends Controller
     {
         return view('Acceuil.index');
     }
+    public function essaies()
+    {
+        return view('src.form-editors');
+    }
     //creer une fonction qui regroupe toutes les vues dependant du clic pour afficher la vue correspondante
     public function AfficherLesDist($page)
     {

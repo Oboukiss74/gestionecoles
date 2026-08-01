@@ -3,8 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Matiere;
-use App\Models\classe_matiere;
 
 return new class extends Migration
 {
@@ -13,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('classe_matiere', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('niveau');
-            $table->string('annee');
+            $table->foreignId('classe_id')->constrained('classes')->onDelete('cascade');
+            $table->foreignId('matiere_id')->constrained('matieres')->onDelete('cascade');
+            $table->integer('coefficient')->default(1);
             $table->timestamps();
         });
     }
@@ -27,10 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('classe_matiere');
     }
-
     
-    //lier les tables classes et eleves
-
 };

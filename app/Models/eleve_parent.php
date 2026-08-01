@@ -14,7 +14,7 @@ class eleve_parent extends Model
     //relation entre les tables eleve_parent et parents
     public function parent()
     {
-        return $this->belongsTo(parents::class);
+        return $this->belongsTo(Parents_eleves::class);
     }
 
 }

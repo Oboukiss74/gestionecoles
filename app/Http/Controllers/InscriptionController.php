@@ -14,12 +14,19 @@ use Illuminate\Support\Facades\Auth;
 class InscriptionController extends Controller
 {
     //teste inscription
-    public function inscriptiontest(){
-        //recuperer un eleve dont l'id est 1
-        $eleve = Eleves::where('id', 2)->get();
-        // $eleve=Eleves::find(1);
+    public function inscriptiontest()
+    {
+        //recuperer l'eleve connecter et l'annee scolaire actuelle
+        $anneeActive = AnneeScolaire::where('active', true)->first();
+        $user = Auth::user();
+        $eleve = Eleves::where('users_id', $user->id)->first();
+        //$eleve = $user->eleve;
+        $classe = $eleve->classe;
+        // $classe = Eleves::with('classe')
+        //         ->where('users_id', $user->id)
+        //         ->first();
         //$eleve=Eleves::first();
-        return view('eleves.inscription_eleve',compact('eleve'));
+        return view('eleves.inscription_eleve', compact('user','eleve','classe','anneeActive'));
     }
     private function eleveConnecte()
     {
@@ -110,15 +117,16 @@ class InscriptionController extends Controller
         $anneeActive = anneeActive();
 
         // Vérifier si l'élève est déjà inscrit cette année
-        $dejaInscrit = Inscriptions::where('id_eleve',
-            $eleve->id)
+        $dejaInscrit = Inscriptions::where(
+            'id_eleve',
+            $eleve->id
+        )
             ->where('annee_scolaire_id', $anneeActive->id);
 
         if ($dejaInscrit) {
             return back()
                 ->withInput()
-                ->withErrors
-                (['id_eleve' => 'Cet élève est déjà inscrit cette année.']);
+                ->withErrors(['id_eleve' => 'Cet élève est déjà inscrit cette année.']);
         }
 
         // Enregistrer l'inscription

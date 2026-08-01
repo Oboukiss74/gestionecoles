@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class inscriptions extends Controller
+class session_inscription_controller extends Controller
 {
     //
 }

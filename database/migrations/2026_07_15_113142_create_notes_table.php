@@ -3,8 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Matiere;
-use App\Models\classe_matiere;
 
 return new class extends Migration
 {
@@ -13,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('niveau');
-            $table->string('annee');
             $table->timestamps();
+            $table->foreignId('eleve_id')->constrained('eleves')->onDelete('cascade');
+            $table->foreignId('matiere_id')->constrained('matieres')->onDelete('cascade');
+            $table->foreignId('annee_scolaire_id')->constrained('annee_scolaires')->onDelete('cascade');
+            $table->float('note', 10, 2);
         });
     }
 
@@ -27,10 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('notes');
     }
-
-    
-    //lier les tables classes et eleves
-
 };

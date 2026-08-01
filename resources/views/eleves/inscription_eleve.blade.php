@@ -26,103 +26,110 @@
                             <form action="#" method="post">
                                 @csrf
                                 <div class="card-body">
-                                    afficher les informations de l'eleve pour confirmer l'inscription
-                                    @foreach ($eleve as $eleves)
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker1">
-                                                    <label class="form-label">nom</label>
-                                                    <input type="text" class="form-control" value="{{ $eleves->nom }}"
-                                                        readonly>
-                                                </div>
-                                            </div>
+                                    {{-- afficher les informations de l'eleve pour confirmer l'inscription --}}
 
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker2">
-                                                    <label class="form-label">prenom</label>
-                                                    <input type="text" class="form-control" value="{{ $eleves->prenom }}"
-                                                        readonly>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker1">
+                                                <label class="form-label">nom</label>
+                                                <input type="text" class="form-control" value="{{ $eleve->nom }}"
+                                                    readonly name="nom">
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker3">
-                                                    <label class="form-label">Matricule</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ $eleves->matricule }}" readonly>
-                                                </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker2">
+                                                <label class="form-label">prenom</label>
+                                                <input type="text" class="form-control" value="{{ $eleve->prenom }}"
+                                                    readonly name="prenom">
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker4">
-                                                    <label class="form-label">Sexe</label>
-                                                    <input type="text" class="form-control" value="{{ $eleves->sexe }}"
-                                                        readonly>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker3">
+                                                <label class="form-label">Matricule</label>
+                                                <input type="text" class="form-control" value="{{ $eleve->matricule }}"
+                                                    readonly name="matricule">
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker5">
-                                                    <label class="form-label    ">Date de naissance</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ $eleves->date_naissance }}" readonly>
-                                                </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker4">
+                                                <label class="form-label">Sexe</label>
+                                                <input type="text" class="form-control" value="{{ $eleve->sexe }}"
+                                                    readonly name="sexe">
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker6">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="text" class="form-control" value="{{ $eleves->email }}">
-                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker5">
+                                                <label class="form-label    ">Date de naissance</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $eleve->date_naissance }}" readonly name="date_naissance">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker5">
+                                                <label class="form-label    ">lieu de naissance</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $eleve->lieu_naissance }}" name="lieu_naissance">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker6">
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ Auth::user()->email }}" name="email">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker5">
+                                                <label class="form-label">Classe</label>
+                                                <input type="text" class="form-control" value="{{ $classe->nom }}" readonly name="nom">
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker5">
-                                                    <label class="form-label">Classe</label>
-                                                    <input type="text" class="form-control" value="classe" readonly>
-                                                </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker6">
+                                                <label class="form-label">Année academique</label>
+                                                <input type="text" class="form-control" value="{{ $anneeActive->libelle }}" readonly name="libelle">
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker6">
-                                                    <label class="form-label">Année academique</label>
-                                                    <input type="text" class="form-control" value="Annee scolaire"
-                                                        readonly>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker5">
+                                                <label class="form-label">Telephone</label>
+                                                <input type="text" class="form-control"
+                                                    value="{{ Auth::user()->eleve->telephone }}" name="telephone">
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker5">
-                                                    <label class="form-label">Telephone</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ $eleves->telephone }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="mb-3 position-relative" id="datepicker6">
-                                                    <label class="form-label">Residence</label>
-                                                    <input type="text" class="form-control" value="residence">
-                                                </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3 position-relative" id="datepicker6">
+                                                <label class="form-label">Residence</label>
+                                                <input type="text" class="form-control" value="residence" name="residence">
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div>
-                                                    <button type="button" class="btn btn-primary">Enregistrer</button>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div>
+                                                <button type="button" class="btn btn-primary">S'inscrire</button>
 
-                                                </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    </div>
+
 
                                 </div>
                             </form>

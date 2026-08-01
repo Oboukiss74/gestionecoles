@@ -19,14 +19,13 @@ class eleves extends Model
         'matricule',
         'nationalite',
         'telephone',
-        'email',
         'telephone_parent',
         'photo',
     ];
 
     public function parent()
     {
-        return $this->belongsTo(Parents::class);
+        return $this->belongsTo(Parents_eleves::class);
     }
     public function classe()
     {
@@ -46,5 +45,10 @@ class eleves extends Model
             ->where('annee_scolaire_id', optional($anneeActive)->id)
             ->first();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }  
 
 }

@@ -1,139 +1,89 @@
 @extends('layouts.app1')
 @section('wrapper2')
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+    {{-- message de succès --}}
+
     <div class="content-page">
         <div class="content">
 
             <!-- Start Content-->
-            <div class="container-fluid">
+            <div class="container-fluid" style="">
 
-                <!-- start page title -->
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="profile-bg-picture"
-                            style="background-image: url(assets/images/bg-profile.jpg); background-position: bottom;">
-                        </div>
-                        <div class="p-sm-3 p-0 profile-user">
-                            <div class="row g-2">
-                                <div class="col-lg-3  d-none d-lg-block">
-                                    <div class="profile-user-img p-2 text-start">
-                                        <img src="assets/images/users/avatar-1.jpg" alt=""
-                                            class="img-thumbnail avatar-lg rounded">
-                                    </div>
-                                    <div class="text-start p-1 pt-2">
-                                        {{-- nom de la personne connecter --}}
-
-                                        <h4 class=" fs-17 ellipsis">{{ Auth::user()->nom }} {{ Auth::user()->prenom }}</h4>
-                                        <p class="font-13"> Eleve en classe de   <h3>{{ $classe->nom }}</h3> </p>
-
-                                        <div
-                                            class="d-flex pt-3 align-items-center justify-content-center flex-xl-nowrap flex-lg-wrap justify-content-md-start">
-                                            <button type="button" class="btn btn-soft-danger me-sm-2 mt-1">
-                                                <i class="mdi mdi-cog align-text-bottom me-1 fs-16 lh-1"></i>
-                                                Editer Profile
-                                            </button>
-                                            <button class="btn btn-soft-info mt-1" href="#"> <i
-                                                    class="mdi mdi-check-all fs-18 me-1 lh-1"></i>Following</button>
-                                        </div>
 
 
-                                    </div>
-                                    <div class="pt-3 ps-2">
-                                        <p class="text-muted mb-2 font-13"><strong>Nom complet:</strong> <span
-                                                class="ms-2">{{ Auth::user()->nom }} {{ Auth::user()->prenom }}</span></p>
 
-                                        <p class="text-muted mb-2 font-13"><strong>Matricule :</strong><span
-                                                class="ms-2">{{ Auth::user()->eleve->matricule }}</span></p>
-
-                                        <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                                class="ms-2">{{ Auth::user()->email }}</span></p>
-
-                                        <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span
-                                                class="ms-2">{{ Auth::user()->eleve->date_naissance }}</span></p>
-                                    </div>
-
-
+                    <div class="col-lg-6" style="transform: translate(55%, 10px);">
+                        <div class="card">
+                            @if (session('successclasse'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('successclasse') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                                 </div>
-
-                                <div class="col-lg-9 bg-light-subtle">
-                                    <div class="profile-content">
-                                        <div class="nav nav-pills nav-justified gap-0 p-3 text-center" id="v-pills-tab"
-                                            role="tablist" aria-orientation="vertical">
-                                            @if ($session)
-                                                <p>
-                                                    Les inscriptions sont ouvertes du
-                                                    <strong>
-                                                        {{ \Carbon\Carbon::parse($session->date_debut)->format('d/m/Y') }}
-                                                    </strong>
-                                                    au
-                                                    <strong>
-                                                        {{ \Carbon\Carbon::parse($session->date_fin)->format('d/m/Y') }}
-                                                    </strong>
-                                                </p>
-                                               
-                                                <li class="nav-item mt-2"><a class="nav-link fs-5 p-2 active" type="button"
-                                                        role="tab" aria-controls="home" aria-selected="true"
-                                                        href="{{ route('inscriptiontest') }}">S'inscrire</a>
-
-                                                </li>
-                                                @else
-                                                <div class="alert alert-warning">
-
-                                                    <h5>Aucune inscription en cours</h5>
-
-                                                    <p>
-                                                        Aucune session d'inscription n'est actuellement ouverte.
-                                                    </p>
-
-                                                </div>
-                                            @endif
+                            @endif
+                            <div class="card-header">
+                                <h4 class=".card-title">Ajout des matieres</h4>
+                                {{-- <p class="text-muted mb-0">
 
 
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
+                                </p> --}}
                             </div>
-                        </div>
-                    </div>
+                            <div class="card-body">
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
 
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul class="mb-0">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <form method="post" action="{{ route('confirmer_ajout_matiere') }}">
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label for="nom" class="form-label">Nom de la matière</label>
+                                        <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom') }}" required>
+                                       
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit">Enregistrer</button>
+                                </form>
+                            </div>
+                        </div> <!-- end card-->
+                    </div> <!-- end col-->
                 </div>
-                <!-- --row end  -->
+                <!-- end row -->
 
+            </div> <!-- container -->
 
-
-
-
-
-            </div>
-            <!-- container -->
-
-        </div>
-        <!-- content -->
+        </div> <!-- content -->
 
         <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> gestion des eleves
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- end Footer -->
+        
 
     </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
 @endsection
 
 @section('contenue')
-    <!-- Theme Settings -->
+    
     <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
         <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
-            <h5 class="text-white m-0">Parametres</h5>
+            <h5 class="text-white m-0">Theme Settings</h5>
             <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         </div>
@@ -167,8 +117,8 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-check mb-1">
-                                    <input class="form-check-input border-secondary" type="radio" name="data-layout-mode"
-                                        id="layout-mode-fluid" value="fluid">
+                                    <input class="form-check-input border-secondary" type="radio"
+                                        name="data-layout-mode" id="layout-mode-fluid" value="fluid">
                                     <label class="form-check-label" for="layout-mode-fluid">Fluid</label>
                                 </div>
                             </div>
@@ -300,4 +250,7 @@
             </div>
         </div>
     </div>
+@endsection
+{{-- les js --}}
+@section('js')
 @endsection

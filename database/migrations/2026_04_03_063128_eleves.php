@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
             $table->foreignId('classe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('parents_id')->constrained('parents')->onDelete('cascade');
+            $table->foreignId('parents_id')->constrained('parents_eleves')->onDelete('cascade');
             $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->string('nom');
             $table->string('prenom');
@@ -22,10 +22,8 @@ return new class extends Migration
             $table->string('lieu_naissance');
             $table->enum('sexe', ['M', 'F']);
             $table->string('matricule')->unique();
-            $table->string('password');
             $table->string('nationalite');
             $table->string('telephone');
-            $table->string('email')->unique();
             $table->string('telephone_parent');
             $table->string('photos')->nullable();
             $table->timestamps();

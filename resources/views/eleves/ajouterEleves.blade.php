@@ -102,7 +102,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="validationCustom05">photo</label>
                                         <input type="file" class="form-control" id="validationCustom05"
-                                            placeholder="photo" required name="photo">
+                                            placeholder="photo" required name="photos">
                                     </div>
 
                                     <div class="mb-3">

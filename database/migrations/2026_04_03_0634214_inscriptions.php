@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->unsignedBigInteger('annee_scolaire_id');
             $table->foreign('annee_scolaire_id')->references('id')->on('annee_scolaires')->onDelete('cascade');
+            $table->foreignId('session_inscription_id')
+            ->constrained('session_inscriptions')
+            ->cascadeOnDelete();
             $table->enum('statut_inscription', ['en_attente', 'approuvée', 'refusée']);
             $table->enum('decision', ['admis', 'redoublant', 'exclu']);
             $table->string('date_inscription');
